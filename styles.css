@@ -1,0 +1,728 @@
+/* ============================================
+   DECO MY TREE - CSS STYLES
+   A festive Christmas tree decoration app
+   ============================================ */
+
+/* CSS Variables */
+:root {
+    --primary-red: #c62828;
+    --primary-green: #2e7d32;
+    --dark-green: #1b5e20;
+    --gold: #ffd700;
+    --snow-white: #ffffff;
+    --light-blue: #e3f2fd;
+    --bg-gradient-start: #1a237e;
+    --bg-gradient-end: #0d47a1;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    --font-display: 'Mountains of Christmas', cursive;
+    --font-body: 'Poppins', sans-serif;
+}
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: #333;
+}
+
+/* Snowfall Effect */
+.snowfall {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    color: white;
+    font-size: 1rem;
+    opacity: 0.8;
+    animation: fall linear infinite;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.3;
+    }
+}
+
+/* Page Layout */
+.page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.page.hidden {
+    display: none;
+}
+
+/* Landing Page */
+.landing-container {
+    background: var(--card-bg);
+    border-radius: 30px;
+    padding: 50px 40px;
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: var(--shadow);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo-section {
+    margin-bottom: 25px;
+}
+
+.tree-icon {
+    font-size: 5rem;
+    animation: bounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 5px 15px rgba(46, 125, 50, 0.4));
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    color: var(--primary-green);
+    margin-top: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--primary-red);
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.description {
+    color: #666;
+    line-height: 1.7;
+    margin: 20px 0 30px;
+    font-size: 0.95rem;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    padding: 16px 32px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-body);
+}
+
+.btn-icon {
+    font-size: 1.3rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(46, 125, 50, 0.5);
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--primary-red);
+    border: 3px solid var(--primary-red);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-red);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* Features */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+}
+
+/* Create Page */
+.create-container {
+    background: var(--card-bg);
+    border-radius: 30px;
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: var(--shadow);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.create-container h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--primary-green);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    font-family: var(--font-body);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+}
+
+/* Tree Page */
+.tree-container {
+    width: 100%;
+    max-width: 500px;
+    background: var(--card-bg);
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.tree-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+    color: white;
+}
+
+.tree-header .back-btn {
+    color: white;
+    margin: 0;
+}
+
+.tree-header .back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.tree-info {
+    text-align: center;
+}
+
+.tree-info h2 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    margin-bottom: 2px;
+}
+
+.tree-info p {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.share-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.share-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Tree Area */
+.tree-area {
+    background: linear-gradient(180deg, #1a237e 0%, #3949ab 50%, #5c6bc0 100%);
+    padding: 30px 20px;
+    position: relative;
+    min-height: 380px;
+}
+
+.tree-wrapper {
+    position: relative;
+    width: 200px;
+    height: 280px;
+    margin: 0 auto;
+}
+
+.tree-star {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+    animation: glow 1.5s ease-in-out infinite alternate;
+    z-index: 10;
+}
+
+@keyframes glow {
+    from {
+        filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+        transform: translateX(-50%) scale(1);
+    }
+    to {
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9));
+        transform: translateX(-50%) scale(1.1);
+    }
+}
+
+.christmas-tree {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+}
+
+.tree-layer {
+    transition: all 0.3s ease;
+}
+
+.ornaments-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.ornament {
+    position: absolute;
+    font-size: 1.5rem;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.2s ease;
+    animation: ornamentDrop 0.5s ease-out;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.ornament:hover {
+    transform: scale(1.3);
+    z-index: 100;
+}
+
+@keyframes ornamentDrop {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Decoration Panel */
+.decoration-panel {
+    padding: 25px;
+    background: white;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.panel-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--primary-green);
+}
+
+.ornament-count {
+    font-size: 0.85rem;
+    color: #888;
+    background: #f5f5f5;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+.ornament-selector {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.ornament-option {
+    font-size: 1.5rem;
+    padding: 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    background: #f5f5f5;
+}
+
+.ornament-option:hover {
+    background: #e8f5e9;
+    transform: scale(1.1);
+}
+
+.ornament-option.selected {
+    background: #c8e6c9;
+    box-shadow: 0 0 0 3px var(--primary-green);
+}
+
+.message-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.message-input input {
+    flex: 1;
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-family: var(--font-body);
+}
+
+.message-input input:focus {
+    outline: none;
+    border-color: var(--primary-green);
+}
+
+/* Modals */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: white;
+    border-radius: 25px;
+    padding: 35px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #999;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.modal-content h3 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--primary-green);
+    margin-bottom: 15px;
+}
+
+.share-code-box {
+    background: linear-gradient(135deg, var(--primary-red) 0%, #d32f2f 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.share-code-box span {
+    font-family: monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+.share-link-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.share-link-box input {
+    flex: 1;
+    padding: 12px;
+    font-size: 0.85rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    color: #666;
+}
+
+.copy-btn {
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.copy-btn:hover {
+    background: var(--dark-green);
+}
+
+.share-tip {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 10px;
+}
+
+/* Message Modal */
+.message-modal-content {
+    padding-top: 50px;
+}
+
+.message-ornament {
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
+
+.message-text {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.message-from {
+    color: #888;
+    font-style: italic;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    z-index: 3000;
+    animation: toastIn 0.3s ease;
+}
+
+.toast.hidden {
+    display: none;
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .landing-container {
+        padding: 40px 25px;
+        border-radius: 25px;
+    }
+
+    .title {
+        font-size: 2.2rem;
+    }
+
+    .tree-icon {
+        font-size: 4rem;
+    }
+
+    .ornament-selector {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .message-input {
+        flex-direction: column;
+    }
+
+    .features {
+        gap: 20px;
+    }
+
+    .tree-header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .tree-info {
+        order: 3;
+        width: 100%;
+    }
+}
+
+/* Snow ground effect at bottom */
+.tree-area::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.3) 100%);
+    border-radius: 0 0 0 0;
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deco My Tree 🎄 - Christmas Messages</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+</head>
+<body>
+    <!-- Snowfall Container -->
+    <div class="snowfall" id="snowfall"></div>
+
+    <!-- Landing Page -->
+    <div class="page" id="landing-page">
+        <div class="landing-container">
+            <div class="logo-section">
+                <div class="tree-icon">🎄</div>
+                <h1 class="title">Deco My Tree</h1>
+                <p class="subtitle">X-mas Messages</p>
+            </div>
+            <p class="description">
+                Create your own virtual Christmas tree, decorate it with beautiful ornaments, 
+                and share it with friends and family. Let them add their own special decorations and messages!
+            </p>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="showCreateTree()">
+                    <span class="btn-icon">✨</span>
+                    Create My Tree
+                </button>
+                <button class="btn btn-secondary" onclick="showViewTree()">
+                    <span class="btn-icon">🔍</span>
+                    Visit a Tree
+                </button>
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <span class="feature-icon">🎨</span>
+                    <span>Decorate</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">💌</span>
+                    <span>Messages</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🔗</span>
+                    <span>Share</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Tree Page -->
+    <div class="page hidden" id="create-page">
+        <div class="create-container">
+            <button class="back-btn" onclick="showLanding()">← Back</button>
+            <h2>Create Your Tree</h2>
+            <div class="form-group">
+                <label for="owner-name">Your Name</label>
+                <input type="text" id="owner-name" placeholder="Enter your name" maxlength="20">
+            </div>
+            <div class="form-group">
+                <label for="tree-name">Tree Name</label>
+                <input type="text" id="tree-name" placeholder="My Christmas Tree" maxlength="30">
+            </div>
+            <button class="btn btn-primary btn-full" onclick="createTree()">
+                <span class="btn-icon">🎄</span>
+                Plant My Tree
+            </button>
+        </div>
+    </div>
+
+    <!-- View Tree Input Page -->
+    <div class="page hidden" id="view-input-page">
+        <div class="create-container">
+            <button class="back-btn" onclick="showLanding()">← Back</button>
+            <h2>Visit a Tree</h2>
+            <div class="form-group">
+                <label for="tree-code">Tree Code</label>
+                <input type="text" id="tree-code" placeholder="Enter tree code" maxlength="10">
+            </div>
+            <button class="btn btn-primary btn-full" onclick="visitTree()">
+                <span class="btn-icon">🔍</span>
+                Find Tree
+            </button>
+        </div>
+    </div>
+
+    <!-- Tree Decoration Page -->
+    <div class="page hidden" id="tree-page">
+        <div class="tree-container">
+            <div class="tree-header">
+                <button class="back-btn" onclick="showLanding()">← Home</button>
+                <div class="tree-info">
+                    <h2 id="display-tree-name">My Christmas Tree</h2>
+                    <p id="display-owner-name">by Owner</p>
+                </div>
+                <button class="share-btn" onclick="shareTree()">
+                    <span>🔗</span> Share
+                </button>
+            </div>
+            
+            <div class="tree-area">
+                <div class="tree-wrapper" id="tree-wrapper">
+                    <!-- Star on top -->
+                    <div class="tree-star">⭐</div>
+                    <!-- Christmas Tree SVG -->
+                    <svg class="christmas-tree" viewBox="0 0 200 280" id="christmas-tree">
+                        <!-- Tree layers -->
+                        <polygon class="tree-layer" points="100,10 130,60 70,60" fill="#2d5a27"/>
+                        <polygon class="tree-layer" points="100,30 145,90 55,90" fill="#2d5a27"/>
+                        <polygon class="tree-layer" points="100,55 155,130 45,130" fill="#236b1c"/>
+                        <polygon class="tree-layer" points="100,85 165,170 35,170" fill="#236b1c"/>
+                        <polygon class="tree-layer" points="100,120 175,220 25,220" fill="#1a5214"/>
+                        <!-- Tree trunk -->
+                        <rect class="tree-trunk" x="85" y="220" width="30" height="40" fill="#5d4037"/>
+                        <!-- Pot -->
+                        <ellipse cx="100" cy="265" rx="35" ry="10" fill="#c62828"/>
+                        <rect x="65" y="255" width="70" height="20" fill="#c62828"/>
+                    </svg>
+                    <!-- Ornaments will be placed here -->
+                    <div class="ornaments-container" id="ornaments-container"></div>
+                </div>
+            </div>
+
+            <div class="decoration-panel">
+                <div class="panel-header">
+                    <h3>Add Decoration</h3>
+                    <span class="ornament-count" id="ornament-count">0 ornaments</span>
+                </div>
+                <div class="ornament-selector">
+                    <div class="ornament-option selected" data-ornament="🔴" onclick="selectOrnament(this)">🔴</div>
+                    <div class="ornament-option" data-ornament="🟡" onclick="selectOrnament(this)">🟡</div>
+                    <div class="ornament-option" data-ornament="🔵" onclick="selectOrnament(this)">🔵</div>
+                    <div class="ornament-option" data-ornament="🟢" onclick="selectOrnament(this)">🟢</div>
+                    <div class="ornament-option" data-ornament="🟣" onclick="selectOrnament(this)">🟣</div>
+                    <div class="ornament-option" data-ornament="⚪" onclick="selectOrnament(this)">⚪</div>
+                    <div class="ornament-option" data-ornament="🎁" onclick="selectOrnament(this)">🎁</div>
+                    <div class="ornament-option" data-ornament="🎀" onclick="selectOrnament(this)">🎀</div>
+                    <div class="ornament-option" data-ornament="🔔" onclick="selectOrnament(this)">🔔</div>
+                    <div class="ornament-option" data-ornament="❄️" onclick="selectOrnament(this)">❄️</div>
+                    <div class="ornament-option" data-ornament="🍬" onclick="selectOrnament(this)">🍬</div>
+                    <div class="ornament-option" data-ornament="🧦" onclick="selectOrnament(this)">🧦</div>
+                    <div class="ornament-option" data-ornament="🦌" onclick="selectOrnament(this)">🦌</div>
+                    <div class="ornament-option" data-ornament="☃️" onclick="selectOrnament(this)">☃️</div>
+                    <div class="ornament-option" data-ornament="🎅" onclick="selectOrnament(this)">🎅</div>
+                    <div class="ornament-option" data-ornament="👼" onclick="selectOrnament(this)">👼</div>
+                </div>
+                <div class="message-input">
+                    <input type="text" id="ornament-message" placeholder="Add a message (optional)" maxlength="50">
+                    <input type="text" id="decorator-name" placeholder="Your name" maxlength="15">
+                </div>
+                <button class="btn btn-primary btn-full" onclick="addOrnament()">
+                    <span class="btn-icon">✨</span>
+                    Hang Ornament
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal hidden" id="share-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeShareModal()">×</button>
+            <h3>🔗 Share Your Tree</h3>
+            <p>Share this code with friends so they can decorate your tree!</p>
+            <div class="share-code-box">
+                <span id="share-code">ABC123</span>
+                <button class="copy-btn" onclick="copyCode()">📋 Copy</button>
+            </div>
+            <div class="share-link-box">
+                <input type="text" id="share-link" readonly>
+                <button class="copy-btn" onclick="copyLink()">📋 Copy</button>
+            </div>
+            <p class="share-tip">💡 Friends can use this code to find and decorate your tree!</p>
+        </div>
+    </div>
+
+    <!-- Message View Modal -->
+    <div class="modal hidden" id="message-modal">
+        <div class="modal-content message-modal-content">
+            <button class="modal-close" onclick="closeMessageModal()">×</button>
+            <div class="message-ornament" id="modal-ornament">🔴</div>
+            <p class="message-text" id="modal-message">Merry Christmas!</p>
+            <p class="message-from" id="modal-from">- From Someone</p>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast hidden" id="toast">
+        <span id="toast-message">Copied!</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
